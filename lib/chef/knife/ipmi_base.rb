@@ -42,7 +42,7 @@ class Chef
         unless node.has_key? 'ipmi'
           puts "Node had no IPMI details (is it running ohai-ipmi plugin?)"
         end
-        @conn = Ipmitool.new(:host => node.ipmi.address, :user => Chef::Config[:knife][:ipmi_user], :password => Chef::Config[:knife][:ipmi_pass])
+        @conn = Ipmitool.new(:host => node.applovin.ipmi.ip, :user => Chef::Config[:knife][:ipmi_user], :password => Chef::Config[:knife][:ipmi_pass])
       end
     end
   end
