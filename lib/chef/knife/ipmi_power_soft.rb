@@ -26,7 +26,7 @@ class Chef
       banner "knife ipmi power soft NODE"
 
       def run
-        puts ipmi.power("soft")
+        puts ipmi.chassis.power.softShutdown
       end
     end
   end

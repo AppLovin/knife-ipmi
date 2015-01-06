@@ -26,7 +26,7 @@ class Chef
       banner "knife ipmi power reset NODE"
 
       def run
-        puts ipmi.power("reset")
+        puts ipmi.chassis.power.reset
       end
     end
   end

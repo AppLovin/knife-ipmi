@@ -26,7 +26,7 @@ class Chef
       banner "knife ipmi power off NODE"
 
       def run
-        puts ipmi.power("off")
+        puts ipmi.chassis.power.off
       end
     end
   end

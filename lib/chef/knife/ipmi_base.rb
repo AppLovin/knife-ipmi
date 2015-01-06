@@ -18,7 +18,7 @@
 
 require 'chef/knife'
 require 'chef/search/query'
-require 'ruby-ipmitool'
+require 'rubyipmi'
 
 class Chef
   class Knife
@@ -39,10 +39,10 @@ class Chef
         end
 
         node = Chef::Node.load(name_args[0])
-        unless node.has_key? 'ipmi'
+        unless node.applovin.has_key? 'ipmi'
           puts "Node had no IPMI details (is it running ohai-ipmi plugin?)"
         end
-        @conn = Ipmitool.new(:host => node.applovin.ipmi.ip, :user => Chef::Config[:knife][:ipmi_user], :password => Chef::Config[:knife][:ipmi_pass])
+        @conn = Rubyipmi.connect(Chef::Config[:knife][:ipmi_user], Chef::Config[:knife][:ipmi_pass], node.applovin.ipmi.ip)
       end
     end
   end
