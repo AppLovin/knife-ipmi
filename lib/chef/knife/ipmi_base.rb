@@ -29,20 +29,36 @@ class Chef
           show_usage
           exit 1
         end
-        unless defined? config[:ipmi_user]
-          puts "Please set your IPMI username in knife.rb"
-          exit 1
-        end
-        unless defined? config[:ipmi_user]
-          puts "Please set your IPMI password in knife.rb"
-          exit 1
-        end
 
         node = Chef::Node.load(name_args[0])
         unless node.applovin.has_key? 'ipmi'
           puts "Node had no IPMI details (is it running ohai-ipmi plugin?)"
         end
-        @conn = Rubyipmi.connect(Chef::Config[:knife][:ipmi_user], Chef::Config[:knife][:ipmi_pass], node.applovin.ipmi.ip)
+        @conn = Rubyipmi.connect(ipmi_user, ipmi_pass, node.applovin.ipmi.ip)
+      end
+
+      def server
+        @node = Chef::Node.load(name_args[0])
+        unless @node.applovin.has_key? 'ipmi'
+          puts "Node had no IPMI details (is it running ohai-ipmi plugin?)"
+        end
+        @node
+      end 
+
+      def ipmi_pass
+        unless defined? config[:ipmi_pass]
+          puts "Please set your IPMI password in knife.rb"
+          exit 1
+        end
+        Chef::Config[:knife][:ipmi_pass]
+      end
+
+      def ipmi_user
+        unless defined? Chef::Config[:knife][:ipmi_user]
+          puts "Please set your IPMI username in knife.rb"
+          exit 1
+        end
+        Chef::Config[:knife][:ipmi_user]
       end
     end
   end
