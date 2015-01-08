@@ -1,6 +1,6 @@
 #
-# Author:: Paul Thomas (<paul@paulthomas.eu>)
-# Copyright:: Copyright (c) 2012 Paul Thomas
+# Author:: Jeune Asuncion (<ops@applovin.com>)
+# Copyright:: Copyright (c) 2012 Jeune Asuncion
 # License:: Apache License, Version 2.0
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
